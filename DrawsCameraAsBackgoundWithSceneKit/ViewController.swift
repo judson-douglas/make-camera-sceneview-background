@@ -16,11 +16,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //capture video input in a AVCaptureLayerVideoPreviewLayer and add it as a sublayer to a UIView's layer
-        var captureSession = AVCaptureSession()
-        var previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        //capture video input in an AVCaptureLayerVideoPreviewLayer
+        let captureSession = AVCaptureSession()
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-
+        
         if let videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) {
             var err: NSError? = nil
             if let videoIn : AVCaptureDeviceInput = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: &err) as? AVCaptureDeviceInput {
@@ -40,31 +40,28 @@ class ViewController: UIViewController {
                 println("Failed to create video capture device.")
             }
         }
-     //   previewLayer.frame = self.sceneView.bounds
-     //   self.view.layer.addSublayer(previewLayer)
         captureSession.startRunning()
         
-        
-        //create a SceneView with backgroundColor = UIColor.clearColor() and add it as a subview of the UIView
-      
-      //  sceneView.frame = self.view.bounds
-     //   sceneView.backgroundColor = UIColor.clearColor()
-        previewLayer.frame = self.sceneView.bounds
-      //  scene.background.contents
+        //add AVCaptureVideoPreviewLayer as sublayer of self.view.layer
+        previewLayer.frame = self.view.bounds
+        self.view.layer.addSublayer(previewLayer)
        
-        
+        //create a SceneView with a clear background color and add it as a subview of self.view
+        let sceneView = SCNView()
+        sceneView.frame = self.view.bounds
+        sceneView.backgroundColor = UIColor.clearColor()
+        previewLayer.frame = self.view.bounds
+        self.view.addSubview(sceneView)
        
+        /* now you could begin to build your scene with the device's camera video as your background
         let scene = SCNScene()
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         let boxGeometry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
         let boxNode = SCNNode(geometry: boxGeometry)
         scene.rootNode.addChildNode(boxNode)
-        scene.background.contents = previewLayer
         sceneView.scene = scene
-      
-        
-       
+        */
 
     }
 
