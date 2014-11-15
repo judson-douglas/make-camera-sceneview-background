@@ -12,6 +12,7 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var sceneView: SCNView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,28 +40,31 @@ class ViewController: UIViewController {
                 println("Failed to create video capture device.")
             }
         }
-        previewLayer.frame = self.view.bounds
-        self.view.layer.addSublayer(previewLayer)
+     //   previewLayer.frame = self.sceneView.bounds
+     //   self.view.layer.addSublayer(previewLayer)
         captureSession.startRunning()
         
         
         //create a SceneView with backgroundColor = UIColor.clearColor() and add it as a subview of the UIView
-        let sceneView = SCNView()
-        sceneView.frame = self.view.bounds
-        sceneView.backgroundColor = UIColor.clearColor()
-        previewLayer.frame = self.view.bounds
-        self.view.addSubview(sceneView)
+      
+      //  sceneView.frame = self.view.bounds
+     //   sceneView.backgroundColor = UIColor.clearColor()
+        previewLayer.frame = self.sceneView.bounds
+      //  scene.background.contents
+       
         
-        /* now you can build your scene
+       
         let scene = SCNScene()
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         let boxGeometry = SCNBox(width: 10.0, height: 10.0, length: 10.0, chamferRadius: 1.0)
         let boxNode = SCNNode(geometry: boxGeometry)
         scene.rootNode.addChildNode(boxNode)
-        sceneView.scene = scene 
-        */
-
+        scene.background.contents = previewLayer
+        sceneView.scene = scene
+      
+        
+       
 
     }
 
