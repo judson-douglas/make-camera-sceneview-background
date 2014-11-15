@@ -12,7 +12,6 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var sceneView: SCNView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +52,7 @@ class ViewController: UIViewController {
         previewLayer.frame = self.view.bounds
         self.view.addSubview(sceneView)
        
-        /* now you could begin to build your scene with the device's camera video as your background
+        //now you could begin to build your scene with the device's camera video as your background
         let scene = SCNScene()
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
@@ -61,7 +60,7 @@ class ViewController: UIViewController {
         let boxNode = SCNNode(geometry: boxGeometry)
         scene.rootNode.addChildNode(boxNode)
         sceneView.scene = scene
-        */
+
 
     }
 
